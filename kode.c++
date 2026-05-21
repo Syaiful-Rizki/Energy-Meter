@@ -9,8 +9,7 @@
 // =====================================================
 // FIREBASE CONFIG
 // =====================================================
-#define API_KEY "[REMOVED-FIREBASE-APIKEY]"
-#define DATABASE_URL "https://iot-energy-meter-45051-default-rtdb.asia-southeast1.firebasedatabase.app"
+#include "secrets.h" // Provide `API_KEY` and `DATABASE_URL` in a gitignored file
 
 // =====================================================
 // FIREBASE OBJECT
