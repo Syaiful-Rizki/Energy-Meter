@@ -8,14 +8,14 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-apiKey: "[REMOVED-FIREBASE-APIKEY]",
-  authDomain: "iot-energy-meter-45051.firebaseapp.com",
-  databaseURL: "https://iot-energy-meter-45051-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "iot-energy-meter-45051",
-  storageBucket: "iot-energy-meter-45051.firebasestorage.app",
-  messagingSenderId: "749284219456",
-  appId: "1:749284219456:web:04711d67bf8267aca51da5",
-  measurementId: "G-FTVFKBLRVX"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
