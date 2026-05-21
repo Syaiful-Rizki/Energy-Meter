@@ -1,0 +1,124 @@
+.monitoring-page {
+  min-height: 100vh;
+}
+
+.monitoring-content {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===== Device Header ===== */
+.monitoring-device-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1rem 1.5rem;
+}
+
+.monitoring-device-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.monitoring-device-icon {
+  color: var(--accent-blue);
+}
+
+.monitoring-device-info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.monitoring-device-info p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0.15rem 0 0;
+}
+
+/* ===== Metrics Grid ===== */
+.monitoring-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+/* ===== Detail Card ===== */
+.monitoring-detail-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.monitoring-detail-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+}
+
+.monitoring-detail-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.monitoring-detail-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.detail-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-range {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .monitoring-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .monitoring-detail-row {
+    grid-template-columns: 100px 1fr;
+  }
+  .detail-range {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .monitoring-content {
+    padding: 1rem;
+  }
+  .monitoring-metrics {
+    grid-template-columns: 1fr;
+  }
+}

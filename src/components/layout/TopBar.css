@@ -1,0 +1,41 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.topbar-title-icon {
+  color: var(--accent-blue);
+}
+
+.topbar-title h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.topbar-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.topbar-status svg {
+  color: var(--accent-blue);
+}
