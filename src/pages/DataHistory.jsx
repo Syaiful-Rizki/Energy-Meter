@@ -6,7 +6,8 @@
 import { useState, useMemo } from 'react';
 import useHistoryData from '../hooks/useHistoryData';
 import TopBar from '../components/layout/TopBar';
-import { formatTimestamp, formatNumber } from '../utils/formatters';
+import { formatTimestamp, formatNumber, formatRupiah } from '../utils/formatters';
+import { PLN_TARIFF_PER_KWH } from '../utils/constants';
 import {
   MdStorage,
   MdFileDownload,
@@ -40,7 +41,8 @@ export default function DataHistory() {
         String(item.voltage).includes(q) ||
         String(item.current).includes(q) ||
         String(item.power).includes(q) ||
-        String(item.energy).includes(q)
+        String(item.energy).includes(q) ||
+        String(Math.round((item.energy || 0) * PLN_TARIFF_PER_KWH)).includes(q)
     );
   }, [sortedData, searchQuery]);
 
@@ -60,6 +62,7 @@ export default function DataHistory() {
     'Current (A)': formatNumber(item.current, 2),
     'Power (W)': formatNumber(item.power, 0),
     'Energy (kWh)': formatNumber(item.energy, 2),
+    'Biaya PLN (Rp)': Math.round((item.energy || 0) * PLN_TARIFF_PER_KWH),
   }));
 
   // Buat worksheet
@@ -73,6 +76,7 @@ export default function DataHistory() {
     { wch: 15 },
     { wch: 15 },
     { wch: 18 },
+    { wch: 20 },
   ];
 
   // Buat workbook
@@ -146,28 +150,33 @@ export default function DataHistory() {
                 <th>Current (A)</th>
                 <th>Power (W)</th>
                 <th>Energy (kWh)</th>
+                <th className="col-cost">Biaya PLN (Rp)</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="data-table-empty">Memuat data...</td>
+                  <td colSpan={7} className="data-table-empty">Memuat data...</td>
                 </tr>
               ) : paginatedData.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="data-table-empty">Tidak ada data</td>
+                  <td colSpan={7} className="data-table-empty">Tidak ada data</td>
                 </tr>
               ) : (
-                paginatedData.map((item, i) => (
-                  <tr key={item.id}>
-                    <td>{(currentPage - 1) * PAGE_SIZE + i + 1}</td>
-                    <td>{formatTimestamp(item.timestamp)}</td>
-                    <td>{formatNumber(item.voltage, 1)}</td>
-                    <td>{formatNumber(item.current, 2)}</td>
-                    <td>{formatNumber(item.power, 0)}</td>
-                    <td>{formatNumber(item.energy, 2)}</td>
-                  </tr>
-                ))
+                paginatedData.map((item, i) => {
+                  const cost = (item.energy || 0) * PLN_TARIFF_PER_KWH;
+                  return (
+                    <tr key={item.id}>
+                      <td>{(currentPage - 1) * PAGE_SIZE + i + 1}</td>
+                      <td>{formatTimestamp(item.timestamp)}</td>
+                      <td>{formatNumber(item.voltage, 1)}</td>
+                      <td>{formatNumber(item.current, 2)}</td>
+                      <td>{formatNumber(item.power, 0)}</td>
+                      <td>{formatNumber(item.energy, 2)}</td>
+                      <td className="col-cost">{formatRupiah(cost)}</td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>

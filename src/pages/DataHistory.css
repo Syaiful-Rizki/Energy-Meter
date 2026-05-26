@@ -144,6 +144,17 @@
   color: var(--text-secondary);
 }
 
+/* ===== Cost Column ===== */
+.data-table th.col-cost {
+  color: #22c55e;
+}
+
+.data-table td.col-cost {
+  color: #22c55e;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ===== Pagination ===== */
 .data-pagination {
   display: flex;

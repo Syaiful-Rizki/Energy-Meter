@@ -34,6 +34,9 @@ export const CHART_COLORS = {
   energy: '#22c55e',
 };
 
+// PLN Electricity Tariff (Rp per kWh) — Tarif R-1/TR ≥1.300 VA (2024)
+export const PLN_TARIFF_PER_KWH = 1699.53;
+
 // Metric card gradients
 export const CARD_GRADIENTS = {
   voltage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',

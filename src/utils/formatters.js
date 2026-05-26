@@ -11,6 +11,19 @@ export function formatNumber(value, decimals = 1) {
 }
 
 /**
+ * Format a number as Indonesian Rupiah currency
+ */
+export function formatRupiah(value) {
+  if (value === null || value === undefined || isNaN(value)) return '--';
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(Number(value));
+}
+
+/**
  * Format a timestamp string to readable date/time
  */
 export function formatTimestamp(timestamp) {
