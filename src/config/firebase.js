@@ -18,7 +18,22 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+let app;
+try {
+  app = initializeApp(firebaseConfig);
+} catch (error) {
+  console.error("Firebase init error:", error);
+  if (typeof window !== 'undefined') {
+    setTimeout(() => {
+      document.body.innerHTML = `<div style="color:red; padding:20px; font-family:sans-serif;">
+        <h2>Firebase Initialization Error</h2>
+        <pre>${error.stack || error.message || String(error)}</pre>
+        <p>Check your .env.local file configuration.</p>
+      </div>`;
+    }, 1000);
+  }
+}
+
 
 export const auth = getAuth(app);
 export const db = getDatabase(app);

@@ -9,6 +9,7 @@ import TopBar from '../components/layout/TopBar';
 import MetricCard from '../components/cards/MetricCard';
 import RealtimeChart from '../components/charts/RealtimeChart';
 import StatusBadge from '../components/common/StatusBadge';
+import ElectricityBillCard from '../components/cards/ElectricityBillCard';
 import { formatTimestamp } from '../utils/formatters';
 import { CARD_GRADIENTS } from '../utils/constants';
 import {
@@ -48,11 +49,35 @@ export default function Dashboard() {
     ? Math.min((data.energy / maxEnergy) * 100, 100)
     : 0;
 
+  // Bill & Efficiency calculations
+  const costPerKwh = 1500; // Rp 1500/kWh as example
+  const currentEnergy = data.energy || 2.1; // Default to 2.1 to show UI initially
+  const billAmount = currentEnergy > 2.1 ? Math.round(currentEnergy * costPerKwh) : 18250; 
+  
+  const voltage = data.voltage || 220;
+  const voltageStability = Math.min(Math.max(Math.round(100 - Math.abs(220 - voltage)), 0), 100);
+  
+  const power = data.power || 1500;
+  const powerUsagePercent = Math.min(Math.round((power / 2200) * 100), 100);
+  
+  let deviceStatus = 'Normal';
+  if (!isOnline) deviceStatus = 'Critical';
+  else if (voltage < 200 || voltage > 240) deviceStatus = 'Warning';
+
   return (
     <div className="dashboard-page">
       <TopBar title="Dashboard" icon={MdDashboard} />
 
       <div className="dashboard-content">
+        <ElectricityBillCard 
+          billAmount={billAmount}
+          todaysUsage={currentEnergy}
+          efficiency={92}
+          voltageStability={voltageStability}
+          powerUsage={powerUsagePercent}
+          status={deviceStatus}
+        />
+
         {/* Metric Cards Row */}
         <div className="dashboard-metrics">
           <MetricCard
