@@ -2,7 +2,8 @@
 // SIDEBAR COMPONENT
 // Navigation sidebar with user info & logout
 // =====================================================
-
+import { useState } from 'react';
+import { MdMenu, MdClose } from 'react-icons/md';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import StatusBadge from '../common/StatusBadge';
@@ -27,6 +28,7 @@ const navItems = [
 ];
 
 export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
   const { currentUser, logout } = useAuth();
   const { data } = useRealtimeData();
   const navigate = useNavigate();
@@ -41,7 +43,30 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={() => setIsOpen(false)} 
+        />
+      )}
+
+      {/* Mobile Toggle Button */}
+      <button 
+        className="mobile-menu-btn" 
+        onClick={() => setIsOpen(true)}
+      >
+        <MdMenu size={28} />
+      </button>
+
+      <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+        <button
+          className="sidebar-close-btn"
+          onClick={() => setIsOpen(false)}
+        >
+          <MdClose size={24} />
+        </button>
       {/* Brand */}
       <div className="sidebar-brand">
         <div className="sidebar-brand-icon">
@@ -92,5 +117,6 @@ export default function Sidebar() {
         </button>
       </div>
     </aside>
+    </>
   );
 }

@@ -67,7 +67,6 @@ export default function Dashboard() {
   return (
     <div className="dashboard-page">
       <TopBar title="Dashboard" icon={MdDashboard} />
-
       <div className="dashboard-content">
         <ElectricityBillCard 
           billAmount={billAmount}
