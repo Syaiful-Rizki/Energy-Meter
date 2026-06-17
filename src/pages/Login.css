@@ -1,12 +1,17 @@
+/* Hide global scrollbar when login page is active */
+body:has(.login-page) {
+  overflow: hidden !important;
+}
+
 .login-page {
-  min-height: 100dvh;
+  position: fixed;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+  box-sizing: border-box;
 
   padding: 1rem;
   background: #070d1a;
@@ -103,8 +108,9 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   margin: 1rem;
+  transform: scale(0.8);
 }
 
 .login-card-inner {
