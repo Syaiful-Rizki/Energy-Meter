@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 240px;
-  height: 100vh;
+  height: calc(100vh / 0.75);
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border-color);
   display: flex;
@@ -111,6 +111,7 @@
 
 /* ===== Footer / User Info ===== */
 .sidebar-footer {
+  margin-top: auto;
   padding: 1rem 1.25rem 1.5rem;
   border-top: 1px solid var(--border-color);
 }
@@ -222,7 +223,7 @@
     left: -280px;
     top: 0;
     width: 280px;
-    height: 100vh;
+    height: calc(100vh / 0.75);
     z-index: 1000;
     transition: left 0.3s ease;
   }

@@ -51,8 +51,12 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  min-height: 100vh;
+  min-height: calc(100vh / 0.75);
   overflow-x: hidden;
+}
+
+body:not(:has(.login-page)) {
+  zoom: 0.75;
 }
 
 /* ===== Scrollbar ===== */
@@ -95,13 +99,13 @@ img {
 /* ===== App Layout ===== */
 .app-layout {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh / 0.75);
 }
 
 .app-main {
   flex: 1;
   margin-left: var(--sidebar-width);
-  min-height: 100vh;
+  min-height: calc(100vh / 0.75);
   background: var(--bg-primary);
 }
 

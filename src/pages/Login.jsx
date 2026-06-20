@@ -6,7 +6,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { MdLock, MdPerson, MdLogin, MdSensors } from 'react-icons/md';
+import { MdLock, MdPerson, MdLogin, MdSensors, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import './Login.css';
 
 export default function Login() {
@@ -21,6 +21,8 @@ export default function Login() {
   const [signedUpPassword, setSignedUpPassword] = useState('');
   const [showSignupSuccessModal, setShowSignupSuccessModal] = useState(false);
   const [resetting, setResetting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [toast, setToast] = useState({ text: '', type: 'success', visible: false });
   const { login, resetPassword, signup } = useAuth();
   const navigate = useNavigate();
@@ -221,13 +223,21 @@ export default function Login() {
                 <MdLock size={20} className="login-input-icon" />
                 <input
                   id="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
                 />
+                <button
+                  type="button"
+                  className="login-password-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  tabIndex="-1"
+                >
+                  {showPassword ? <MdVisibilityOff size={20} /> : <MdVisibility size={20} />}
+                </button>
               </div>
             </div>
             {isSignUp && (
@@ -237,13 +247,21 @@ export default function Login() {
                   <MdLock size={20} className="login-input-icon" />
                   <input
                     id="confirmPassword"
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
                     required={isSignUp}
                     autoComplete="new-password"
                   />
+                  <button
+                    type="button"
+                    className="login-password-toggle"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    tabIndex="-1"
+                  >
+                    {showConfirmPassword ? <MdVisibilityOff size={20} /> : <MdVisibility size={20} />}
+                  </button>
                 </div>
               </div>
             )}
